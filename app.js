@@ -8,6 +8,7 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/signup.html");
 });
@@ -36,7 +37,7 @@ app.post("/", function (req, res) {
     const url = "https://us9.api.mailchimp.com/3.0/lists/5db8f650ff";
     const options = {
         method: "POST",
-        auth:"zeno1:a6d6253214260e0228c1c618f22fca0a-us9"
+        auth:"updated api:b3cbf06bc380f93d8be3898afd99cfac-us9"
        };      
            
       

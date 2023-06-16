@@ -37,7 +37,7 @@ app.post("/", function (req, res) {
     const url = "https://us9.api.mailchimp.com/3.0/lists/5db8f650ff";
     const options = {
         method: "POST",
-        auth:"updated api:b3cbf06bc380f93d8be3898afd99cfac-us9"
+        auth:"mynewsletterzieco :bcd58b37061f76b45b84f61f38efa2c6-us9"
        };      
            
       

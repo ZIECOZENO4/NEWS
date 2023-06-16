@@ -2,12 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
-const modules = require("express");
+require('dotenv').config(); // Load environment variables from .env file
 const app = express();
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/signup.html");
@@ -37,23 +36,19 @@ app.post("/", function (req, res) {
     const url = "https://us9.api.mailchimp.com/3.0/lists/5db8f650ff";
     const options = {
         method: "POST",
-        auth:"mynewsletterzieco :bcd58b37061f76b45b84f61f38efa2c6-us9"
-       };      
-           
-      
-   
+        auth: "newsletterzieco:${process.env.API_KEY}",
+    };
 
     const mailchimpRequest = https.request(url, options, function (response) {
         response.on("data", function (data) {
             console.log(JSON.parse(data));
         });
-       
-       
+
         if (response.statusCode === 200) {
             res.sendFile(__dirname + "/success.html");
-        }else{
+        } else {
             res.sendFile(__dirname + "/failure.html");
-        };
+        }
     });
 
     mailchimpRequest.write(jsonData);
@@ -61,10 +56,9 @@ app.post("/", function (req, res) {
 });
 
 app.post("/failure", function (req, res) {
-  res.redirect("/"); 
-})
+    res.redirect("/");
+});
 
 app.listen(3000, function () {
     console.log("The server is currently running on port 3000");
 });
-

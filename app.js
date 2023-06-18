@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
-require('dotenv').config(); // Load environment variables from .env file
+ // Load environment variables from .env file
 const app = express();
 
 app.use(express.static("public"));
@@ -33,10 +34,10 @@ app.post("/", function (req, res) {
 
     const jsonData = JSON.stringify(data);
 
-    const url = "https://us9.api.mailchimp.com/3.0/lists/5db8f650ff";
+    const url = process.env.URL;
     const options = {
         method: "POST",
-        auth: "newsletterzieco:${process.env.API_KEY}",
+        auth:process.env.API_KEY ,
     };
 
     const mailchimpRequest = https.request(url, options, function (response) {
